@@ -12,40 +12,36 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Week_3_code_along.Properties;
 
-namespace Week_3_code_along
+namespace week_4_code
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Movie> moviesList;
         public MainWindow()
         {
             InitializeComponent();
+            moviesList = new List<Movie>();
         }
 
-        private void Bark_Button_Click(object sender, RoutedEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            Dog dog = new Dog();
-            dog.Bark();
+            Movie movie = new Movie(titleInput.Text, Convert.ToInt32(ReleaseInput.Text));
+
+            moviesList.Add(movie);
+            titleInput.Clear();
+            ReleaseInput.Clear();
         }
-        private void SayName_Button_Click(object sender, RoutedEventArgs e)
+
+        private void ShowButton_Click(object sender, RoutedEventArgs e)
         {
-           /* string dogName = DogName.Text;
-            Dog dog = new Dog();
-            dog.Name = dogName;
-            dog.SayName(); */
-
-            Goose goose = new Goose();
-            goose.Name = "Name";
-            goose.Age = 9001;
-            goose.AttackDamage = 999999999;
-
-            goose.Honk();
-            goose.Attack();
-
+           foreach (Movie movie in moviesList)
+            {
+                movie.ShowDetails();
+            }
         }
     }
 }
