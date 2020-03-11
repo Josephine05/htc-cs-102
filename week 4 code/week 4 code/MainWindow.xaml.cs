@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,28 +21,49 @@ namespace week_4_code
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Movie> moviesList;
+        private ObservableCollection<Movie> movieList;
         public MainWindow()
         {
             InitializeComponent();
-            moviesList = new List<Movie>();
+            movieList = new ObservableCollection<Movie>();
+            lvMovies.ItemsSource = movieList;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            Movie movie = new Movie(titleInput.Text, Convert.ToInt32(ReleaseInput.Text));
-
-            moviesList.Add(movie);
+            Movie movie = new Movie(titleInput.Text, Convert.ToInt32(ReleaseInput.Text), Convert.ToDouble(TomatoesInput.Text));
+            //Movie selectedMovie = lvMovies.SelectedItem as Movie;
+            foreach (Movie m in movieList)
+            {
+                if (movie.Title == m.Title)
+                {
+                    MessageBox.Show("no you have");
+                    return;
+                }
+            }
+            movieList.Add(movie);
             titleInput.Clear();
             ReleaseInput.Clear();
+            TomatoesInput.Clear();
         }
 
         private void ShowButton_Click(object sender, RoutedEventArgs e)
         {
-           foreach (Movie movie in moviesList)
+           foreach (Movie movie in movieList)
             {
                 movie.ShowDetails();
+
             }
         }
+        private void lvMovies_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Movie selectedMovie = lvMovies.SelectedItem as Movie;
+            if (selectedMovie != null)
+            {
+                selectedMovie.ShowDetails();
+                
+            }
+        }
+
     }
 }

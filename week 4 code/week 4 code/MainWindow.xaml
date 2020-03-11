@@ -8,10 +8,21 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel Margin="0,10,20,10">
+            <ListView Name="lvMovies" MouseDoubleClick="lvMovies_MouseDoubleClick" Height="150 px" Margin="0,0,0,10">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="150" Header="Title" DisplayMemberBinding="{Binding Title}"></GridViewColumn>
+                        <GridViewColumn Width="150" Header="Release Year" DisplayMemberBinding="{Binding ReleaseYear}"></GridViewColumn>
+                        <GridViewColumn Width="150" Header="Rotten Tomates" DisplayMemberBinding="{Binding RottenTomatoes}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>  
+            </ListView>
             <TextBlock>Title</TextBlock>
             <TextBox Name ="titleInput" Margin="0,0,0,15"></TextBox>
             <TextBlock>Release Year</TextBlock>
             <TextBox Name ="ReleaseInput" Margin="0,0,0,15"></TextBox>
+            <TextBlock>Rotten Tomatoes</TextBlock>
+            <TextBox Name ="TomatoesInput" Margin="0,0,0,15"></TextBox>
             <Button HorizontalAlignment="Center" Margin="0,0,0,15" Click="AddButton_Click">Add</Button>
             <Button HorizontalAlignment="Center" Margin="0,0,0,15" Click="ShowButton_Click">Show all movies</Button>
         </StackPanel>
